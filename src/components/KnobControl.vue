@@ -27,6 +27,10 @@ const props = defineProps({
     type: String,
     default: '#3b82f6'
   },
+  strokeWidth: {
+    type: Number,
+    default: 5
+  },
   startAngle: {
     type: Number,
     default: -90 // 预设从 12 点钟方向开始
@@ -46,7 +50,7 @@ const sizeNum = computed(() => {
 })
 
 const center = computed(() => sizeNum.value / 2)
-const radius = computed(() => (sizeNum.value - 12) / 2) // 留出 stroke 宽度
+const radius = computed(() => (sizeNum.value - props.strokeWidth) / 2) // 留出 stroke 宽度
 const circumference = computed(() => 2 * Math.PI * radius.value)
 
 // 计算当前百分比
@@ -185,7 +189,7 @@ onUnmounted(() => {
         :r="radius"
         class="knob-track"
         fill="none"
-        stroke-width="8"
+        :stroke-width="strokeWidth"
         :stroke="trackColor"
       />
 
@@ -196,7 +200,7 @@ onUnmounted(() => {
         :r="radius"
         class="knob-progress"
         fill="none"
-        stroke-width="8"
+        :stroke-width="strokeWidth"
         :stroke="primaryColor"
         stroke-linecap="round"
         :stroke-dasharray="circumference"
