@@ -23,6 +23,10 @@ const props = defineProps({
     type: String,
     default: '#3b82f6'
   },
+  trackColor: {
+    type: String,
+    default: '#3b82f6'
+  },
   startAngle: {
     type: Number,
     default: -90 // 预设从 12 点钟方向开始
@@ -182,6 +186,7 @@ onUnmounted(() => {
         class="knob-track"
         fill="none"
         stroke-width="8"
+        :stroke="trackColor"
       />
 
       <!-- 进度条 -->
@@ -227,7 +232,7 @@ onUnmounted(() => {
 }
 
 .knob-track {
-  stroke: var(--knob-track-color, #e5e7eb);
+  /* stroke 由 trackColor prop 控制 */
 }
 
 .knob-progress {

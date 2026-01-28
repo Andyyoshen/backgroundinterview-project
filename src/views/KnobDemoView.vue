@@ -29,7 +29,7 @@ const value3 = ref(75)
           <KnobControl
             v-model="value2"
             :size="100"
-            primary-color="#10b981"
+            primary-color="#ef4444"
             :min="0"
             :max="50"
           />
@@ -41,10 +41,10 @@ const value3 = ref(75)
           <KnobControl
             v-model="value3"
             :size="160"
-            primary-color="#f59e0b"
+            primary-color="#ef4444"
             :min="0"
-            :max="100"
-            :start-angle="0"
+            :max="180"
+            :start-angle="150"
           />
           <p>大尺寸 / 橙色 / 3点钟起始</p>
           <p>数值：{{ value3 }}</p>
