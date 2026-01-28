@@ -31,6 +31,10 @@ const props = defineProps({
     type: Number,
     default: 5
   },
+  fillColor: {
+    type: String,
+    default: '#00FF00'
+  },
   startAngle: {
     type: Number,
     default: -90 // 预设从 12 点钟方向开始
@@ -182,6 +186,14 @@ onUnmounted(() => {
       :height="sizeNum"
       class="knob-svg"
     >
+      <!-- 中心背景填充 -->
+      <circle
+        :cx="center"
+        :cy="center"
+        :r="radius - strokeWidth / 2"
+        :fill="fillColor"
+      />
+
       <!-- 背景轨道 -->
       <circle
         :cx="center"
