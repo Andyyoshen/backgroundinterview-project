@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import KnobControl from '@/components/KnobControl.vue'
 
-// 示范用的数值
+// 示範用的數值
 const value1 = ref(50)
 const value2 = ref(25)
 const value3 = ref(75)
@@ -11,21 +11,21 @@ const value4 = ref(60)
 
 <template>
   <div class="knob-demo">
-    <h1>Knob 元件示范</h1>
+    <h1>Knob 元件示範</h1>
 
     <!-- <div class="demo-section">
       <h2>基本用法</h2>
       <div class="demo-row">
         <div class="demo-item">
           <KnobControl v-model="value1" />
-          <p>预设样式</p>
-          <p>数值：{{ value1 }}</p>
+          <p>預設樣式</p>
+          <p>數值：{{ value1 }}</p>
         </div>
       </div>
     </div> -->
 
     <div class="demo-section">
-      <h2>自定义颜色</h2>
+      <h2>自定義顏色</h2>
       <div class="demo-row">
         <div class="demo-item">
           <KnobControl
@@ -68,24 +68,24 @@ const value4 = ref(60)
     </div>
 
     <div class="demo-section">
-      <h2>Props 说明</h2>
+      <h2>Props 說明</h2>
       <table class="props-table">
         <thead>
           <tr>
             <th>Prop</th>
             <th>Type</th>
-            <th>说明</th>
+            <th>說明</th>
           </tr>
         </thead>
         <tbody>
-          <tr><td>v-model</td><td>Number</td><td>当前数值</td></tr>
+          <tr><td>v-model</td><td>Number</td><td>當前數值</td></tr>
           <tr><td>min</td><td>Number</td><td>最小值</td></tr>
           <tr><td>max</td><td>Number</td><td>最大值</td></tr>
           <tr><td>size</td><td>Number/String</td><td>元件尺寸</td></tr>
-          <tr><td>primary-color</td><td>String</td><td>进度条颜色</td></tr>
-          <tr><td>track-color</td><td>String</td><td>背景轨道颜色</td></tr>
+          <tr><td>primary-color</td><td>String</td><td>進度條顏色</td></tr>
+          <tr><td>track-color</td><td>String</td><td>背景軌道顏色</td></tr>
           <tr><td>fill-color</td><td>String</td><td>中心背景填充色</td></tr>
-          <tr><td>stroke-width</td><td>Number</td><td>轨道粗细</td></tr>
+          <tr><td>stroke-width</td><td>Number</td><td>軌道粗細</td></tr>
           <tr><td>start-angle</td><td>Number</td><td>起始角度</td></tr>
         </tbody>
       </table>
