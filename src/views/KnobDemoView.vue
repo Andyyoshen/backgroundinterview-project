@@ -6,59 +6,89 @@ import KnobControl from '@/components/KnobControl.vue'
 const value1 = ref(50)
 const value2 = ref(25)
 const value3 = ref(75)
+const value4 = ref(60)
 </script>
 
 <template>
   <div class="knob-demo">
     <h1>Knob 元件示范</h1>
 
-    <div class="demo-section">
+    <!-- <div class="demo-section">
       <h2>基本用法</h2>
       <div class="demo-row">
         <div class="demo-item">
           <KnobControl v-model="value1" />
-          <p>当前数值：{{ value1 }}</p>
+          <p>预设样式</p>
+          <p>数值：{{ value1 }}</p>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <div class="demo-section">
-      <h2>自定义属性</h2>
+      <h2>自定义颜色</h2>
       <div class="demo-row">
         <div class="demo-item">
           <KnobControl
             v-model="value2"
             :size="100"
             primary-color="#ef4444"
+            track-color="#fecaca"
+            fill-color="#2F0000"
             :min="0"
             :max="50"
           />
-          <p>小尺寸 / 绿色 / 0-50</p>
-          <p>数值：{{ value2 }}</p>
         </div>
 
         <div class="demo-item">
           <KnobControl
             v-model="value3"
-            :size="160"
-            primary-color="#ef4444"
+            :size="120"
+            primary-color="#10b981"
+            track-color="#d1fae5"
+            fill-color="#ecfdf5"
             :min="0"
-            :max="180"
-            :start-angle="150"
+            :max="100"
           />
-          <p>大尺寸 / 橙色 / 3点钟起始</p>
-          <p>数值：{{ value3 }}</p>
+        </div>
+
+        <div class="demo-item">
+          <KnobControl
+            v-model="value4"
+            :size="140"
+            primary-color="#f59e0b"
+            track-color="#fef3c7"
+            fill-color="#fffbeb"
+            :stroke-width="65"
+            :min="0"
+            :max="100"
+            :start-angle="0"
+          />
         </div>
       </div>
     </div>
 
     <div class="demo-section">
-      <h2>使用说明</h2>
-      <ul>
-        <li>点击并拖拽旋钮来调整数值</li>
-        <li>支援滑鼠和触控操作</li>
-        <li>数值会即时更新并通知父组件</li>
-      </ul>
+      <h2>Props 说明</h2>
+      <table class="props-table">
+        <thead>
+          <tr>
+            <th>Prop</th>
+            <th>Type</th>
+            <th>说明</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>v-model</td><td>Number</td><td>当前数值</td></tr>
+          <tr><td>min</td><td>Number</td><td>最小值</td></tr>
+          <tr><td>max</td><td>Number</td><td>最大值</td></tr>
+          <tr><td>size</td><td>Number/String</td><td>元件尺寸</td></tr>
+          <tr><td>primary-color</td><td>String</td><td>进度条颜色</td></tr>
+          <tr><td>track-color</td><td>String</td><td>背景轨道颜色</td></tr>
+          <tr><td>fill-color</td><td>String</td><td>中心背景填充色</td></tr>
+          <tr><td>stroke-width</td><td>Number</td><td>轨道粗细</td></tr>
+          <tr><td>start-angle</td><td>Number</td><td>起始角度</td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </template>
@@ -110,5 +140,28 @@ h2 {
 ul {
   line-height: 1.8;
   color: var(--color-text);
+}
+
+.props-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.props-table th,
+.props-table td {
+  border: 1px solid var(--color-border);
+  padding: 0.5rem 1rem;
+  text-align: left;
+}
+
+.props-table th {
+  background-color: var(--color-background-soft);
+  font-weight: 600;
+}
+
+.props-table td:first-child {
+  font-family: monospace;
+  color: var(--color-heading);
 }
 </style>

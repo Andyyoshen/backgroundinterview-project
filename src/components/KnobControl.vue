@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 
-// Props 定义
+// Props 定義
 const props = defineProps({
   modelValue: {
     type: Number,
@@ -25,7 +25,7 @@ const props = defineProps({
   },
   trackColor: {
     type: String,
-    default: '#3b82f6'
+    default: '#CDCD9A'
   },
   strokeWidth: {
     type: Number,
@@ -37,57 +37,57 @@ const props = defineProps({
   },
   startAngle: {
     type: Number,
-    default: -90 // 预设从 12 点钟方向开始
+    default: -90 // 預設從 12 點鐘方向開始
   }
 })
 
-// Emits 定义
+// Emits 定義
 const emit = defineEmits(['update:modelValue'])
 
 // Refs
 const knobRef = ref(null)
 const isDragging = ref(false)
 
-// 计算尺寸相关数值
+// 計算尺寸相關數值
 const sizeNum = computed(() => {
   return typeof props.size === 'string' ? parseInt(props.size) : props.size
 })
 
 const center = computed(() => sizeNum.value / 2)
-const radius = computed(() => (sizeNum.value - props.strokeWidth) / 2) // 留出 stroke 宽度
+const radius = computed(() => (sizeNum.value - props.strokeWidth) / 2) // 留出 stroke 寬度
 const circumference = computed(() => 2 * Math.PI * radius.value)
 
-// 计算当前百分比
+// 計算當前百分比
 const percentage = computed(() => {
   const range = props.max - props.min
   if (range === 0) return 0
   return (props.modelValue - props.min) / range
 })
 
-// 计算 stroke-dashoffset 实现进度条效果
+// 計算 stroke-dashoffset 實現進度條效果
 const strokeDashoffset = computed(() => {
   return circumference.value * (1 - percentage.value)
 })
 
-// 将角度转换为数值
+// 將角度轉換為數值
 const angleToValue = (angle) => {
-  // 将角度标准化到 0-360 范围
+  // 將角度標準化到 0-360 範圍
   let normalizedAngle = angle - props.startAngle
   if (normalizedAngle < 0) normalizedAngle += 360
   if (normalizedAngle > 360) normalizedAngle -= 360
 
-  // 转换为百分比再转换为数值
+  // 轉換為百分比再轉換為數值
   const percent = normalizedAngle / 360
   const range = props.max - props.min
   let value = props.min + percent * range
 
-  // 限制在 min/max 范围内
+  // 限制在 min/max 範圍內
   value = Math.max(props.min, Math.min(props.max, value))
 
   return Math.round(value)
 }
 
-// 计算滑鼠相对于元件中心的角度
+// 計算滑鼠相對於元件中心的角度
 const getAngleFromEvent = (event) => {
   if (!knobRef.value) return 0
 
@@ -95,29 +95,29 @@ const getAngleFromEvent = (event) => {
   const centerX = rect.left + rect.width / 2
   const centerY = rect.top + rect.height / 2
 
-  // 取得滑鼠/触控位置
+  // 取得滑鼠/觸控位置
   const clientX = event.touches ? event.touches[0].clientX : event.clientX
   const clientY = event.touches ? event.touches[0].clientY : event.clientY
 
-  // 使用 atan2 计算角度
+  // 使用 atan2 計算角度
   const deltaX = clientX - centerX
   const deltaY = clientY - centerY
 
-  // atan2 返回 -PI 到 PI，转换为 0-360 度
+  // atan2 返回 -PI 到 PI，轉換為 0-360 度
   let angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI)
   angle = (angle + 360) % 360
 
   return angle
 }
 
-// 更新数值
+// 更新數值
 const updateValue = (event) => {
   const angle = getAngleFromEvent(event)
   const newValue = angleToValue(angle)
   emit('update:modelValue', newValue)
 }
 
-// 滑鼠事件处理
+// 滑鼠事件處理
 const handleMouseDown = (event) => {
   event.preventDefault()
   isDragging.value = true
@@ -138,7 +138,7 @@ const handleMouseUp = () => {
   document.removeEventListener('mouseup', handleMouseUp)
 }
 
-// 触控事件处理
+// 觸控事件處理
 const handleTouchStart = (event) => {
   event.preventDefault()
   isDragging.value = true
@@ -160,7 +160,7 @@ const handleTouchEnd = () => {
   document.removeEventListener('touchend', handleTouchEnd)
 }
 
-// 清理事件监听
+// 清理事件監聽
 onUnmounted(() => {
   document.removeEventListener('mousemove', handleMouseMove)
   document.removeEventListener('mouseup', handleMouseUp)
@@ -180,7 +180,7 @@ onUnmounted(() => {
     @mousedown="handleMouseDown"
     @touchstart="handleTouchStart"
   >
-    <!-- SVG 环形进度条 -->
+    <!-- SVG 環形進度條 -->
     <svg
       :width="sizeNum"
       :height="sizeNum"
@@ -194,7 +194,7 @@ onUnmounted(() => {
         :fill="fillColor"
       />
 
-      <!-- 背景轨道 -->
+      <!-- 背景軌道 -->
       <circle
         :cx="center"
         :cy="center"
@@ -205,7 +205,7 @@ onUnmounted(() => {
         :stroke="trackColor"
       />
 
-      <!-- 进度条 -->
+      <!-- 進度條 -->
       <circle
         :cx="center"
         :cy="center"
@@ -224,7 +224,7 @@ onUnmounted(() => {
       />
     </svg>
 
-    <!-- 中心数值显示 -->
+    <!-- 中心數值顯示 -->
     <div class="knob-value">
       {{ modelValue }}
     </div>
